@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahawer | Q2 2025 Progress Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        .stat-card {
+            background-color: #0A9396;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            color: #EE9B00;
+            line-height: 1;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #94D2BD;
+            transform: translateX(-50%);
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #EE9B00;
+            border: 4px solid #005F73;
+        }
+        .timeline-content {
+            width: calc(50% - 3rem);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="bg-[#005F73] text-white">
+        <div class="container mx-auto px-6 py-12 text-center">
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight">MAHAWER</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold mt-2 text-[#94D2BD]">Q2 2025 Progress Report</h2>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-200">A quarter of strategic sales and a revolutionary leap in printing speed, setting the stage for our next generation of 3D printers.</p>
+        </div>
+    </div>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="kpis" class="mb-16">
+            <h3 class="text-3xl font-bold text-center mb-8 text-[#005F73]">Performance at a Glance</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="stat-card">
+                    <div class="stat-number">68.3k</div>
+                    <div class="stat-label">Total Revenue (EGP)</div>
+                </div>
+                <div class="stat-card bg-[#EE9B00]">
+                    <div class="stat-number">300%</div>
+                    <div class="stat-label">Speed Increase Achieved</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Printers Sold This Quarter</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sales" class="mb-16">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+                <div class="lg:col-span-2">
+                    <h3 class="text-3xl font-bold text-[#005F73] mb-4">Q2 Sales Breakdown</h3>
+                    <p class="text-lg mb-4">This quarter, we successfully liquidated all legacy stock and sold our first MX4 prototype. Revenue was driven by a diverse set of customers, highlighting the versatility of our machines.</p>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded-lg shadow"><strong>Abdelrahman M.:</strong> Repeat customer, prints scale model ships.</div>
+                        <div class="bg-white p-4 rounded-lg shadow"><strong>Sherif S.:</strong> Prints giveaway trinkets for a side business.</div>
+                        <div class="bg-white p-4 rounded-lg shadow"><strong>Mario G.:</strong> Creates factory jigs for lathes and CNCs.</div>
+                        <div class="bg-white p-4 rounded-lg shadow"><strong>Ahmed A.:</strong> Our crucial MX4 prototype partner.</div>
+                    </div>
+                </div>
+                <div class="lg:col-span-3">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h4 class="text-xl font-bold text-center mb-4">Revenue Contribution by Model</h4>
+                        <div class="chart-container">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mx4-project" class="bg-white rounded-lg shadow-md p-6 md:p-8 mb-16">
+            <h3 class="text-3xl font-bold text-center mb-2 text-[#005F73]">The MX4 Revolution: A Leap in Performance</h3>
+            <p class="text-lg text-center max-w-3xl mx-auto mb-8">The MX4 prototype wasn't just a sale; it was a high-intensity R&D project that validated our new technology stack and redefined our performance benchmarks.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h4 class="text-xl font-bold text-center mb-4">From Standard to High-Speed</h4>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="speedChart"></canvas>
+                    </div>
+                    <p class="text-center mt-4">The new hardware and firmware combination boosted printing speeds from a 60 mm/s max to a consistent 180 mm/s.</p>
+                </div>
+                <div class="text-center">
+                     <p class="text-8xl font-black text-[#EE9B00]">46</p>
+                     <p class="text-2xl font-bold text-[#005F73]">Hour Successful Print</p>
+                     <p class="mt-2">A major reliability milestone, proving the new system's stability for long, complex jobs.</p>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <h4 class="text-xl font-bold text-center mb-6 text-[#005F73]">Our Journey Through Technical Challenges</h4>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-0">
+                    <div class="text-center p-4">
+                        <div class="text-2xl font-bold">Input Shaping</div>
+                        <p>Calibrating Marlin to cancel resonance at high speeds.</p>
+                    </div>
+                    <div class="flow-arrow hidden md:block">➡️</div>
+                    <div class="flow-arrow block md:hidden">⬇️</div>
+                    <div class="text-center p-4">
+                        <div class="text-2xl font-bold">Sensorless Homing</div>
+                        <p>Tuning motor sensitivity for reliable, accurate homing.</p>
+                    </div>
+                    <div class="flow-arrow hidden md:block">➡️</div>
+                    <div class="flow-arrow block md:hidden">⬇️</div>
+                    <div class="text-center p-4">
+                        <div class="text-2xl font-bold">Extruder Upgrade</div>
+                        <p>Replacing the extruder to meet the higher flow rate demands.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="mb-16">
+            <h3 class="text-3xl font-bold text-center mb-8 text-[#005F73]">Building the Future: Next Gen MX3</h3>
+             <p class="text-lg text-center max-w-3xl mx-auto mb-12">The lessons from the MX4 are directly accelerating our next product launch. We're not just making it faster; we're re-engineering our entire platform for better performance and efficiency.</p>
+
+            <div class="relative py-8">
+                <div class="timeline-line"></div>
+                <div class="flex flex-col gap-16">
+                    <div class="flex justify-end relative">
+                        <div class="timeline-dot" style="top: 0;"></div>
+                        <div class="timeline-content bg-white p-6 rounded-lg shadow-md text-right">
+                            <h4 class="font-bold text-lg text-[#CA6702]">June 2025: MX4 Success</h4>
+                            <p>Validated 3x speed increase and system reliability.</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-start relative">
+                        <div class="timeline-dot" style="top: 0;"></div>
+                        <div class="timeline-content bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="font-bold text-lg text-[#CA6702]">July 2025: New MX3 Prototype</h4>
+                            <p>Assembly begins, incorporating MX4 tech and a new 24V system for more power.</p>
+                        </div>
+                    </div>
+                     <div class="flex justify-end relative">
+                        <div class="timeline-dot" style="top: 0;"></div>
+                        <div class="timeline-content bg-white p-6 rounded-lg shadow-md text-right">
+                            <h4 class="font-bold text-lg text-[#AE2012]">Delay & Adaptation</h4>
+                            <p>Funding delays push timeline back one month. Focus shifted to perfecting documentation.</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-start relative">
+                        <div class="timeline-dot" style="top: 0;"></div>
+                        <div class="timeline-content bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="font-bold text-lg text-[#0A9396]">End of August 2025: Projected Launch</h4>
+                            <p>Target for a production-ready, next-generation MX3.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="outlook" class="bg-[#005F73] text-white rounded-lg shadow-md p-8">
+            <h3 class="text-3xl font-bold text-center mb-4">Strategic Outlook</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="text-xl font-semibold mb-2 text-[#94D2BD]">The Challenge</h4>
+                    <p>Increased market pressure from faster, mass-produced overseas competitors continues to be our primary external challenge.</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-2 text-[#94D2BD]">Our Strategy</h4>
+                    <p>We counter this by leveraging our core strengths: rapid local innovation, dedicated hands-on customer support, and building robust, high-value machines validated by real-world performance.</p>
+                </div>
+            </div>
+             <div class="text-center mt-8 border-t border-gray-500 pt-6">
+                <h4 class="text-xl font-semibold mb-2 text-[#94D2BD]">Team Expansion</h4>
+                <p>We've welcomed intern Fares to the team. His focus on designing custom PCBs is a key long-term initiative to reduce costs and increase our manufacturing independence.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 bg-gray-200">
+        <p class="text-gray-600">Mahawer 3D Printers &copy; 2025</p>
+    </footer>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#374151',
+                        font: {
+                            size: 14,
+                            family: 'Inter'
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    titleFont: { family: 'Inter' },
+                    bodyFont: { family: 'Inter' }
+                }
+            }
+        };
+
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['MX4 Prototype', 'MX3 (S. Sameh)', 'MX3 (A. Mamdouh)', 'MX2 (M. George)'],
+                datasets: [{
+                    label: 'Revenue in EGP',
+                    data: [25000, 15800, 15000, 12500],
+                    backgroundColor: ['#EE9B00', '#0A9396', '#94D2BD', '#005F73'],
+                    borderColor: '#ffffff',
+                    borderWidth: 4,
+                    hoverOffset: 8
+                }]
+            },
+            options: { ...commonChartOptions }
+        });
+
+        const speedCtx = document.getElementById('speedChart').getContext('2d');
+        new Chart(speedCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Previous Max Speed', 'New MX4 Speed'],
+                datasets: [{
+                    label: 'Print Speed (mm/s)',
+                    data: [60, 180],
+                    backgroundColor: ['#94D2BD', '#EE9B00'],
+                    borderColor: ['#0A9396', '#CA6702'],
+                    borderWidth: 2,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                           color: '#e5e7eb'
+                        },
+                        ticks: {
+                            color: '#4b5563'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#4b5563'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
